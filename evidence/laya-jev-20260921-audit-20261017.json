@@ -1,0 +1,569 @@
+{
+  "original_experiment_date": "2026-09-21",
+  "audit_date": "2026-10-17",
+  "provenance": "Extracted from archived headtohead.py, headtohead.json and h2h_rows.json; models were not rerun for this audit.",
+  "hardware": "i5-10400F, GTX 1080 Ti 11 GB; local Laya versus network-hosted Jev",
+  "questions": {
+    "department": {
+      "type": "choice",
+      "instructions": "Which department should handle this request?",
+      "criteria": {
+        "billing": "invoices, payments, refunds, billing address",
+        "technical": "bugs, outages, system errors, integrations",
+        "sales": "pricing, quotes, demos, new contracts, trials",
+        "other": "legal, compliance, partnerships, everything else"
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "How urgent is this request? Levels: 0 = no deadline and nothing broken; 1 = money wrongly taken, a slow or degrading system, or the customer asks for it soon; 2 = something is blocked or down, a deadline is stated, or the customer threatens to cancel.",
+      "criteria": [
+        "no deadline, nothing broken",
+        "money wrongly taken, slow or degrading, or asked for soon",
+        "blocked, down, deadline stated, or threat to cancel"
+      ]
+    },
+    "asks_refund": {
+      "type": "noul",
+      "instructions": "Does the message ask for money back, a refund, or a charge to be reversed?"
+    }
+  },
+  "scoring": "Exact department match; urgency score rounded to nearest integer; refund probability thresholded at 0.5 in the original analysis.",
+  "label_warning": "Original urgency labels conflict with the question rubric in at least cases 15 and 16. Case 15 says not urgent but is labelled 1; case 16 says locked out but is labelled 1 although blocked is defined as 2. Counts show agreement with provisional author labels, not validated accuracy.",
+  "summary": {
+    "jev": {
+      "matches_by_question": {
+        "dept": 16,
+        "urg": 13,
+        "refund": 16
+      },
+      "matches": 45,
+      "decisions": 48,
+      "median_ms_including_first_call": 357.25
+    },
+    "laya": {
+      "matches_by_question": {
+        "dept": 12,
+        "urg": 9,
+        "refund": 16
+      },
+      "matches": 37,
+      "decisions": 48,
+      "median_ms_including_first_call": 90.4
+    }
+  },
+  "cases": [
+    {
+      "case": 1,
+      "synthetic_input": {
+        "subject": "Duplicate charge on invoice #4411",
+        "body": "Hi, we were billed twice for March. Please refund the duplicate today or we will cancel our plan."
+      },
+      "original_reference_labels": {
+        "dept": "billing",
+        "urg": 2,
+        "refund": true
+      },
+      "jev": {
+        "dept": "billing",
+        "urg": 2,
+        "urg_round": 2,
+        "refund": true,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 654.6
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 1.1378,
+        "urg_round": 1,
+        "refund": true,
+        "conf": 0.7841,
+        "conf_u": 0.0814,
+        "conf_r": 0.8448,
+        "ms": 489.2
+      }
+    },
+    {
+      "case": 2,
+      "synthetic_input": {
+        "subject": "Login page 500 error after password reset",
+        "body": "I reset my password but the login page now returns a 500 error. I cannot access my dashboard at all."
+      },
+      "original_reference_labels": {
+        "dept": "technical",
+        "urg": 2,
+        "refund": false
+      },
+      "jev": {
+        "dept": "technical",
+        "urg": 2,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 323.5
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.9686,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.6515,
+        "conf_u": 0.8841,
+        "conf_r": 0.9999,
+        "ms": 85.8
+      }
+    },
+    {
+      "case": 3,
+      "synthetic_input": {
+        "subject": "Pricing for 200 seats",
+        "body": "We are a 200 person company and would like a quote for the enterprise plan. What discounts do you offer on annual billing?"
+      },
+      "original_reference_labels": {
+        "dept": "sales",
+        "urg": 0,
+        "refund": false
+      },
+      "jev": {
+        "dept": "sales",
+        "urg": 0,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 346.1
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 1.2734,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.3521,
+        "conf_u": 0.0926,
+        "conf_r": 0.9421,
+        "ms": 88.3
+      }
+    },
+    {
+      "case": 4,
+      "synthetic_input": {
+        "subject": "Tax ID missing from invoice PDF",
+        "body": "Our finance team needs the tax ID printed on the invoice PDF. Could you add it? No rush, the next invoice is fine."
+      },
+      "original_reference_labels": {
+        "dept": "billing",
+        "urg": 0,
+        "refund": false
+      },
+      "jev": {
+        "dept": "billing",
+        "urg": 0.03,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 0.98,
+        "conf_u": 0.96,
+        "conf_r": null,
+        "ms": 345.0
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 1.4483,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.3785,
+        "conf_u": 0.3156,
+        "conf_r": 0.9914,
+        "ms": 89.5
+      }
+    },
+    {
+      "case": 5,
+      "synthetic_input": {
+        "subject": "App crashes on uploads over 100MB",
+        "body": "Every time I upload a file larger than 100MB the app crashes and I lose my work. This is blocking our migration."
+      },
+      "original_reference_labels": {
+        "dept": "technical",
+        "urg": 2,
+        "refund": false
+      },
+      "jev": {
+        "dept": "technical",
+        "urg": 2,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 346.4
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.9817,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.5917,
+        "conf_u": 0.9266,
+        "conf_r": 0.9705,
+        "ms": 99.7
+      }
+    },
+    {
+      "case": 6,
+      "synthetic_input": {
+        "subject": "Charged after cancellation",
+        "body": "We cancelled in January but were still charged for February and March. Please refund those two months."
+      },
+      "original_reference_labels": {
+        "dept": "billing",
+        "urg": 1,
+        "refund": true
+      },
+      "jev": {
+        "dept": "billing",
+        "urg": 1,
+        "urg_round": 1,
+        "refund": true,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 483.1
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 1.0897,
+        "urg_round": 1,
+        "refund": true,
+        "conf": 0.6551,
+        "conf_u": 0.2448,
+        "conf_r": 0.805,
+        "ms": 91.8
+      }
+    },
+    {
+      "case": 7,
+      "synthetic_input": {
+        "subject": "Demo for the analytics add-on before our Q3 planning",
+        "body": "We are evaluating vendors this month and need a demo of the analytics add-on before our Q3 planning meeting."
+      },
+      "original_reference_labels": {
+        "dept": "sales",
+        "urg": 1,
+        "refund": false
+      },
+      "jev": {
+        "dept": "sales",
+        "urg": 1.26,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 0.46,
+        "conf_r": null,
+        "ms": 325.2
+      },
+      "laya": {
+        "dept": "sales",
+        "urg": 0.8408,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.0892,
+        "conf_u": 0.1953,
+        "conf_r": 1.0,
+        "ms": 95.1
+      }
+    },
+    {
+      "case": 8,
+      "synthetic_input": {
+        "subject": "Webhook deliveries are late",
+        "body": "Webhooks arrive 10 to 15 minutes late most evenings. It is not blocking us yet but it is unreliable."
+      },
+      "original_reference_labels": {
+        "dept": "technical",
+        "urg": 1,
+        "refund": false
+      },
+      "jev": {
+        "dept": "technical",
+        "urg": 0.96,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 0.95,
+        "conf_r": null,
+        "ms": 388.5
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.8796,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.3413,
+        "conf_u": 0.6612,
+        "conf_r": 0.9992,
+        "ms": 87.2
+      }
+    },
+    {
+      "case": 9,
+      "synthetic_input": {
+        "subject": "Update billing address",
+        "body": "Please update the billing address on our account to 44 King Street. No invoice changes needed."
+      },
+      "original_reference_labels": {
+        "dept": "billing",
+        "urg": 0,
+        "refund": false
+      },
+      "jev": {
+        "dept": "billing",
+        "urg": 0,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 419.3
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 0.2603,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 0.7499,
+        "conf_u": 0.5779,
+        "conf_r": 0.9056,
+        "ms": 101.9
+      }
+    },
+    {
+      "case": 10,
+      "synthetic_input": {
+        "subject": "Partnership enquiry",
+        "body": "We are a systems integrator and would like to explore a partnership with your team."
+      },
+      "original_reference_labels": {
+        "dept": "other",
+        "urg": 0,
+        "refund": false
+      },
+      "jev": {
+        "dept": "other",
+        "urg": 0,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 0.95,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 368.1
+      },
+      "laya": {
+        "dept": "sales",
+        "urg": 0.9778,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.0769,
+        "conf_u": 0.1859,
+        "conf_r": 0.9647,
+        "ms": 152.5
+      }
+    },
+    {
+      "case": 11,
+      "synthetic_input": {
+        "subject": "Production API down since 6 AM",
+        "body": "Our production API has been failing since 6 AM, we are losing transactions every minute. Please treat as urgent."
+      },
+      "original_reference_labels": {
+        "dept": "technical",
+        "urg": 2,
+        "refund": false
+      },
+      "jev": {
+        "dept": "technical",
+        "urg": 2,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 388.9
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.9799,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.7714,
+        "conf_u": 0.923,
+        "conf_r": 0.9999,
+        "ms": 93.1
+      }
+    },
+    {
+      "case": 12,
+      "synthetic_input": {
+        "subject": "Double charged for the annual plan",
+        "body": "The annual plan was charged twice on the same card. I need one of the charges reversed."
+      },
+      "original_reference_labels": {
+        "dept": "billing",
+        "urg": 1,
+        "refund": true
+      },
+      "jev": {
+        "dept": "billing",
+        "urg": 1,
+        "urg_round": 1,
+        "refund": true,
+        "conf": 1,
+        "conf_u": 1,
+        "conf_r": null,
+        "ms": 370.3
+      },
+      "laya": {
+        "dept": "billing",
+        "urg": 1.378,
+        "urg_round": 1,
+        "refund": true,
+        "conf": 0.6962,
+        "conf_u": 0.2478,
+        "conf_r": 0.815,
+        "ms": 88.1
+      }
+    },
+    {
+      "case": 13,
+      "synthetic_input": {
+        "subject": "Do you support SSO with Okta?",
+        "body": "Before we buy, can you confirm whether the team plan supports SSO with Okta?"
+      },
+      "original_reference_labels": {
+        "dept": "sales",
+        "urg": 0,
+        "refund": false
+      },
+      "jev": {
+        "dept": "sales",
+        "urg": 0.31,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 0.77,
+        "conf_u": 0.53,
+        "conf_r": null,
+        "ms": 412.7
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.3469,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.0327,
+        "conf_u": 0.2709,
+        "conf_r": 1.0,
+        "ms": 90.8
+      }
+    },
+    {
+      "case": 14,
+      "synthetic_input": {
+        "subject": "GDPR data export request",
+        "body": "As part of a compliance review we need a full export of our account data under GDPR. Please advise on the timeline."
+      },
+      "original_reference_labels": {
+        "dept": "other",
+        "urg": 1,
+        "refund": false
+      },
+      "jev": {
+        "dept": "other",
+        "urg": 0.07,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 1,
+        "conf_u": 0.9,
+        "conf_r": null,
+        "ms": 335.2
+      },
+      "laya": {
+        "dept": "other",
+        "urg": 1.2611,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.1011,
+        "conf_u": 0.2804,
+        "conf_r": 0.9999,
+        "ms": 89.7
+      }
+    },
+    {
+      "case": 15,
+      "synthetic_input": {
+        "subject": "Feature request: CSV export",
+        "body": "It would help if reports could be exported as CSV. Not urgent, but we would use it weekly."
+      },
+      "original_reference_labels": {
+        "dept": "technical",
+        "urg": 1,
+        "refund": false
+      },
+      "jev": {
+        "dept": "technical",
+        "urg": 0.01,
+        "urg_round": 0,
+        "refund": false,
+        "conf": 0.82,
+        "conf_u": 0.99,
+        "conf_r": null,
+        "ms": 318.5
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.4828,
+        "urg_round": 1,
+        "refund": false,
+        "conf": 0.0877,
+        "conf_u": 0.302,
+        "conf_r": 0.9999,
+        "ms": 90.0
+      }
+    },
+    {
+      "case": 16,
+      "synthetic_input": {
+        "subject": "Trial expired mid-evaluation",
+        "body": "Our trial expired in the middle of an evaluation and the team is locked out. Can it be extended?"
+      },
+      "original_reference_labels": {
+        "dept": "sales",
+        "urg": 1,
+        "refund": false
+      },
+      "jev": {
+        "dept": "sales",
+        "urg": 2,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.99,
+        "conf_u": 0.99,
+        "conf_r": null,
+        "ms": 319.0
+      },
+      "laya": {
+        "dept": "technical",
+        "urg": 1.8745,
+        "urg_round": 2,
+        "refund": false,
+        "conf": 0.0364,
+        "conf_u": 0.6995,
+        "conf_r": 0.8461,
+        "ms": 88.7
+      }
+    }
+  ]
+}
