@@ -1,0 +1,17 @@
+case,synthetic_subject,synthetic_body,original_department,original_urgency,original_refund,jev_department,jev_urgency_score,jev_refund,jev_ms,laya_department,laya_urgency_score,laya_refund,laya_ms
+1,Duplicate charge on invoice #4411,"Hi, we were billed twice for March. Please refund the duplicate today or we will cancel our plan.",billing,2,True,billing,2,True,654.6,billing,1.1378,True,489.2
+2,Login page 500 error after password reset,I reset my password but the login page now returns a 500 error. I cannot access my dashboard at all.,technical,2,False,technical,2,False,323.5,technical,1.9686,False,85.8
+3,Pricing for 200 seats,We are a 200 person company and would like a quote for the enterprise plan. What discounts do you offer on annual billing?,sales,0,False,sales,0,False,346.1,billing,1.2734,False,88.3
+4,Tax ID missing from invoice PDF,"Our finance team needs the tax ID printed on the invoice PDF. Could you add it? No rush, the next invoice is fine.",billing,0,False,billing,0.03,False,345.0,billing,1.4483,False,89.5
+5,App crashes on uploads over 100MB,Every time I upload a file larger than 100MB the app crashes and I lose my work. This is blocking our migration.,technical,2,False,technical,2,False,346.4,technical,1.9817,False,99.7
+6,Charged after cancellation,We cancelled in January but were still charged for February and March. Please refund those two months.,billing,1,True,billing,1,True,483.1,billing,1.0897,True,91.8
+7,Demo for the analytics add-on before our Q3 planning,We are evaluating vendors this month and need a demo of the analytics add-on before our Q3 planning meeting.,sales,1,False,sales,1.26,False,325.2,sales,0.8408,False,95.1
+8,Webhook deliveries are late,Webhooks arrive 10 to 15 minutes late most evenings. It is not blocking us yet but it is unreliable.,technical,1,False,technical,0.96,False,388.5,technical,1.8796,False,87.2
+9,Update billing address,Please update the billing address on our account to 44 King Street. No invoice changes needed.,billing,0,False,billing,0,False,419.3,billing,0.2603,False,101.9
+10,Partnership enquiry,We are a systems integrator and would like to explore a partnership with your team.,other,0,False,other,0,False,368.1,sales,0.9778,False,152.5
+11,Production API down since 6 AM,"Our production API has been failing since 6 AM, we are losing transactions every minute. Please treat as urgent.",technical,2,False,technical,2,False,388.9,technical,1.9799,False,93.1
+12,Double charged for the annual plan,The annual plan was charged twice on the same card. I need one of the charges reversed.,billing,1,True,billing,1,True,370.3,billing,1.378,True,88.1
+13,Do you support SSO with Okta?,"Before we buy, can you confirm whether the team plan supports SSO with Okta?",sales,0,False,sales,0.31,False,412.7,technical,1.3469,False,90.8
+14,GDPR data export request,As part of a compliance review we need a full export of our account data under GDPR. Please advise on the timeline.,other,1,False,other,0.07,False,335.2,other,1.2611,False,89.7
+15,Feature request: CSV export,"It would help if reports could be exported as CSV. Not urgent, but we would use it weekly.",technical,1,False,technical,0.01,False,318.5,technical,1.4828,False,90.0
+16,Trial expired mid-evaluation,Our trial expired in the middle of an evaluation and the team is locked out. Can it be extended?,sales,1,False,sales,2,False,319.0,technical,1.8745,False,88.7
